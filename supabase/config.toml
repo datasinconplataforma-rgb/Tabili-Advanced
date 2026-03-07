@@ -1,0 +1,13 @@
+project_id = "kggqfopdhsvpkzmxvned"
+
+[functions.get-public-form]
+verify_jwt = false
+
+[functions.check-submission]
+verify_jwt = false
+
+[functions.submit-public-form]
+verify_jwt = false
+
+[functions.get-public-view]
+verify_jwt = false

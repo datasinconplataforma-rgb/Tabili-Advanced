@@ -1,0 +1,1 @@
+ALTER TABLE public.public_view_settings ADD COLUMN access_pin TEXT DEFAULT NULL;
