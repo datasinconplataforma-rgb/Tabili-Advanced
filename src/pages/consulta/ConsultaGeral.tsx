@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useCustomTables, useCustomTableData } from '@/hooks/useCustomTables';
+import { useAllTablesData } from '@/hooks/useAllTablesData';
 import { ProjectFilter } from '@/components/ProjectFilter';
 import { useTableSuggestions } from '@/hooks/useAutocompleteSuggestions';
 import { ModuleSidebarLayout, ModuleMenuItem } from '@/components/ModuleSidebarLayout';
@@ -81,7 +82,7 @@ const formatCellValue = (
   rowData?: Record<string, string>
 ): string => {
   if (columnType === 'formula' && column?.formula_config && rowData) {
-    const result = evaluateFormula(column.formula_config, rowData);
+    const result = evaluateFormula(column.formula_config, rowData, allTablesData);
     if (result !== null) {
       if (typeof result === 'number') {
         return formatCurrency(result);
@@ -120,6 +121,7 @@ export default function ConsultaGeral() {
   const { user } = useAuth();
   const location = useLocation();
   const { tables, loading: tablesLoading } = useCustomTables();
+  const { allTablesData } = useAllTablesData();
   const [selectedTableId, setSelectedTableId] = useState<string>('');
   const [tableSearchFilter, setTableSearchFilter] = useState('');
 
@@ -303,7 +305,7 @@ export default function ConsultaGeral() {
                   <p className="text-muted-foreground text-center">
                     {tableSearchFilter 
                       ? 'Nenhuma tabela encontrada com o filtro atual.' 
-                      : 'Nenhuma tabela com dados disponível. Adicione registros em uma tabela para consultá-la aqui.'}
+                      : 'Nenhuma tabela com dados disponÃ­vel. Adicione registros em uma tabela para consultÃ¡-la aqui.'}
                   </p>
                 </CardContent>
               </Card>
@@ -348,7 +350,7 @@ export default function ConsultaGeral() {
                               <div className="flex items-center gap-1">
                                 <Badge variant="secondary" className="text-[10px] py-0 h-4 gap-1">
                                   {table.permission === 'edit' ? <PencilLine className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-                                  {table.permission === 'edit' ? 'Edição' : 'Visualização'}
+                                  {table.permission === 'edit' ? 'EdiÃ§Ã£o' : 'VisualizaÃ§Ã£o'}
                                 </Badge>
                               </div>
                             </div>
@@ -409,9 +411,9 @@ export default function ConsultaGeral() {
                     <Select value={filter.operator} onValueChange={(v) => updateFilter(index, 'operator', v as ColumnFilter['operator'])}>
                       <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="contains">Contém</SelectItem>
+                        <SelectItem value="contains">ContÃ©m</SelectItem>
                         <SelectItem value="equals">Igual a</SelectItem>
-                        <SelectItem value="starts">Começa com</SelectItem>
+                        <SelectItem value="starts">ComeÃ§a com</SelectItem>
                         <SelectItem value="ends">Termina com</SelectItem>
                         <SelectItem value="greater">Maior que</SelectItem>
                         <SelectItem value="less">Menor que</SelectItem>
@@ -449,7 +451,7 @@ export default function ConsultaGeral() {
                   </DropdownMenu>
                   <Button variant="outline" size="sm" onClick={exportToPDF} disabled={!filteredData.length}><FileText className="h-4 w-4 mr-2" />PDF</Button>
                   <Button variant="outline" size="sm" onClick={exportToExcel} disabled={!filteredData.length}><FileSpreadsheet className="h-4 w-4 mr-2" />Excel</Button>
-                  {selectedTable.is_owner && (<Button variant="outline" size="sm" onClick={() => setPublicViewDialogOpen(true)}><Globe className="h-4 w-4 mr-2" />Visualização Externa</Button>)}
+                  {selectedTable.is_owner && (<Button variant="outline" size="sm" onClick={() => setPublicViewDialogOpen(true)}><Globe className="h-4 w-4 mr-2" />VisualizaÃ§Ã£o Externa</Button>)}
                 </div>
               </CardHeader>
               <CardContent>
@@ -464,7 +466,7 @@ export default function ConsultaGeral() {
                         <TableRow>
                           <TableHead className="w-10"><Checkbox checked={selectedRows.size === filteredData.length && filteredData.length > 0} onCheckedChange={toggleAllSelection} /></TableHead>
                           {displayedColumns.map((col) => (<TableHead key={col.name} className="whitespace-nowrap">{col.display_name}</TableHead>))}
-                          <TableHead className="w-24 text-right">Ações</TableHead>
+                          <TableHead className="w-24 text-right">AÃ§Ãµes</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -516,7 +518,7 @@ export default function ConsultaGeral() {
 
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
-          <AlertDialogHeader><AlertDialogTitle>Confirmar Exclusão</AlertDialogTitle><AlertDialogDescription>Tem certeza que deseja excluir este registro? Esta ação não pode ser desfeita.</AlertDialogDescription></AlertDialogHeader>
+          <AlertDialogHeader><AlertDialogTitle>Confirmar ExclusÃ£o</AlertDialogTitle><AlertDialogDescription>Tem certeza que deseja excluir este registro? Esta aÃ§Ã£o nÃ£o pode ser desfeita.</AlertDialogDescription></AlertDialogHeader>
           <AlertDialogFooter><AlertDialogCancel>Cancelar</AlertDialogCancel><AlertDialogAction onClick={handleDeleteRow} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Excluir</AlertDialogAction></AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
@@ -524,8 +526,8 @@ export default function ConsultaGeral() {
       <AlertDialog open={bulkDeleteDialogOpen} onOpenChange={setBulkDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirmar Exclusão em Massa</AlertDialogTitle>
-            <AlertDialogDescription>Tem certeza que deseja excluir {selectedRows.size} registro{selectedRows.size !== 1 ? 's' : ''}? Esta ação não pode ser desfeita.</AlertDialogDescription>
+            <AlertDialogTitle>Confirmar ExclusÃ£o em Massa</AlertDialogTitle>
+            <AlertDialogDescription>Tem certeza que deseja excluir {selectedRows.size} registro{selectedRows.size !== 1 ? 's' : ''}? Esta aÃ§Ã£o nÃ£o pode ser desfeita.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isDeletingBulk}>Cancelar</AlertDialogCancel>

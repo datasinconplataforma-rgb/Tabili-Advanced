@@ -39,11 +39,11 @@ export interface FormulaReference {
 
 const OPERATORS = [
   { value: '+', label: 'Soma (+)' },
-  { value: '-', label: 'Subtração (-)' },
-  { value: '*', label: 'Multiplicação (×)' },
-  { value: '/', label: 'Divisão (÷)' },
-  { value: '(', label: 'Abre parêntese' },
-  { value: ')', label: 'Fecha parêntese' },
+  { value: '-', label: 'SubtraÃ§Ã£o (-)' },
+  { value: '*', label: 'MultiplicaÃ§Ã£o (Ã—)' },
+  { value: '/', label: 'DivisÃ£o (Ã·)' },
+  { value: '(', label: 'Abre parÃªntese' },
+  { value: ')', label: 'Fecha parÃªntese' },
   { value: ',', label: 'Separador (,)' },
 ];
 
@@ -58,66 +58,66 @@ const LOGIC_OPERATORS = [
 
 const BASIC_FUNCTIONS = {
   MATH: {
-    label: 'Matemática Básica',
+    label: 'MatemÃ¡tica BÃ¡sica',
     icon: Calculator,
     items: [
       { name: 'SOMA', snippet: 'SOMA([A], [B])', description: 'Soma valores', example: 'SOMA([A], [B], 10)' },
-      { name: 'MEDIA', snippet: 'MEDIA([A], [B])', description: 'Média aritmética', example: 'MEDIA([A], [B])' },
-      { name: 'ARRED', snippet: 'ARRED([A], 2)', description: 'Arredonda número', example: 'ARRED([A], 2)' },
+      { name: 'MEDIA', snippet: 'MEDIA([A], [B])', description: 'MÃ©dia aritmÃ©tica', example: 'MEDIA([A], [B])' },
+      { name: 'ARRED', snippet: 'ARRED([A], 2)', description: 'Arredonda nÃºmero', example: 'ARRED([A], 2)' },
     ]
   },
   LOGIC: {
-    label: 'Lógica Básica',
+    label: 'LÃ³gica BÃ¡sica',
     icon: ArrowLeftRight,
     items: [
-      { name: 'SE', snippet: 'SE([A] > 10, "Sim", "Não")', description: 'Condicional SE', example: 'SE([A] > 0, [A], 0)' },
+      { name: 'SE', snippet: 'SE([A] > 10, "Sim", "NÃ£o")', description: 'Condicional SE', example: 'SE([A] > 0, [A], 0)' },
     ]
   },
   TEXT: {
-    label: 'Texto Básico',
+    label: 'Texto BÃ¡sico',
     icon: Type,
     items: [
       { name: 'CONCAT', snippet: 'CONCAT([A], " ", [B])', description: 'Junta textos', example: 'CONCAT("R$ ", [A])' },
     ]
   },
   DATE: {
-    label: 'Data Básica',
+    label: 'Data BÃ¡sica',
     icon: Calendar,
     items: [
       { name: 'HOJE', snippet: 'HOJE()', description: 'Data atual', example: 'HOJE()' },
-      { name: 'DIAS', snippet: 'DIAS([Fim], [Inicio])', description: 'Diferença em dias', example: 'DIAS([DataFim], [DataInicio])' },
+      { name: 'DIAS', snippet: 'DIAS([Fim], [Inicio])', description: 'DiferenÃ§a em dias', example: 'DIAS([DataFim], [DataInicio])' },
     ]
   }
 };
 
 const ADVANCED_FUNCTIONS = {
   MATH: {
-    label: 'Matemática Avançada',
+    label: 'MatemÃ¡tica AvanÃ§ada',
     icon: Calculator,
     items: [
       { name: 'MAX', snippet: 'MAX([A], [B])', description: 'Maior valor', example: 'MAX([A], [B], [C])' },
       { name: 'MIN', snippet: 'MIN([A], [B])', description: 'Menor valor', example: 'MIN([A], [B])' },
       { name: 'ABS', snippet: 'ABS([A])', description: 'Valor absoluto', example: 'ABS([A])' },
-      { name: 'POTENCIA', snippet: 'POTENCIA([A], 2)', description: 'Potência (n^m)', example: 'POTENCIA([A], 2)' },
+      { name: 'POTENCIA', snippet: 'POTENCIA([A], 2)', description: 'PotÃªncia (n^m)', example: 'POTENCIA([A], 2)' },
       { name: 'RAIZ', snippet: 'RAIZ([A])', description: 'Raiz quadrada', example: 'RAIZ([A])' },
-      { name: 'MOD', snippet: 'MOD([A], 2)', description: 'Resto da divisão', example: 'MOD([A], 2)' },
+      { name: 'MOD', snippet: 'MOD([A], 2)', description: 'Resto da divisÃ£o', example: 'MOD([A], 2)' },
     ]
   },
   LOGIC: {
-    label: 'Lógica Avançada',
+    label: 'LÃ³gica AvanÃ§ada',
     icon: ArrowLeftRight,
     items: [
-      { name: 'E', snippet: 'E([A] > 0, [B] < 10)', description: 'E lógico (AND)', example: 'E([A] > 0, [B] > 0)' },
-      { name: 'OU', snippet: 'OU([A] > 0, [B] > 0)', description: 'OU lógico (OR)', example: 'OU([A] > 0, [B] > 0)' },
+      { name: 'E', snippet: 'E([A] > 0, [B] < 10)', description: 'E lÃ³gico (AND)', example: 'E([A] > 0, [B] > 0)' },
+      { name: 'OU', snippet: 'OU([A] > 0, [B] > 0)', description: 'OU lÃ³gico (OR)', example: 'OU([A] > 0, [B] > 0)' },
       { name: 'SEERRO', snippet: 'SEERRO([A] / [B], 0)', description: 'Retorna valor se erro', example: 'SEERRO([A] / [B], 0)' },
     ]
   },
   TEXT: {
-    label: 'Texto Avançado',
+    label: 'Texto AvanÃ§ado',
     icon: Type,
     items: [
-      { name: 'MAIUSCULA', snippet: 'MAIUSCULA([A])', description: 'Texto em maiúsculas', example: 'MAIUSCULA([Nome])' },
-      { name: 'MINUSCULA', snippet: 'MINUSCULA([A])', description: 'Texto em minúsculas', example: 'MINUSCULA([Nome])' },
+      { name: 'MAIUSCULA', snippet: 'MAIUSCULA([A])', description: 'Texto em maiÃºsculas', example: 'MAIUSCULA([Nome])' },
+      { name: 'MINUSCULA', snippet: 'MINUSCULA([A])', description: 'Texto em minÃºsculas', example: 'MINUSCULA([Nome])' },
       { name: 'ESQUERDA', snippet: 'ESQUERDA([A], 3)', description: 'N caracteres da esquerda', example: 'ESQUERDA([Codigo], 3)' },
       { name: 'DIREITA', snippet: 'DIREITA([A], 2)', description: 'N caracteres da direita', example: 'DIREITA([Codigo], 2)' },
       { name: 'TAMANHO', snippet: 'TAMANHO([A])', description: 'Quantidade de caracteres', example: 'TAMANHO([Nome])' },
@@ -125,13 +125,13 @@ const ADVANCED_FUNCTIONS = {
     ]
   },
   DATE: {
-    label: 'Data Avançada',
+    label: 'Data AvanÃ§ada',
     icon: Calendar,
     items: [
       { name: 'ANO', snippet: 'ANO([A])', description: 'Extrai o ano', example: 'ANO([Data])' },
-      { name: 'MES', snippet: 'MES([A])', description: 'Extrai o mês (1-12)', example: 'MES([Data])' },
+      { name: 'MES', snippet: 'MES([A])', description: 'Extrai o mÃªs (1-12)', example: 'MES([Data])' },
       { name: 'DIA', snippet: 'DIA([A])', description: 'Extrai o dia', example: 'DIA([Data])' },
-      { name: 'DIASUTEIS', snippet: 'DIASUTEIS([Inicio], [Fim])', description: 'Dias úteis entre datas', example: 'DIASUTEIS([Inicio], [Fim])' },
+      { name: 'DIASUTEIS', snippet: 'DIASUTEIS([Inicio], [Fim])', description: 'Dias Ãºteis entre datas', example: 'DIASUTEIS([Inicio], [Fim])' },
     ]
   },
   LOOKUP: {
@@ -139,16 +139,16 @@ const ADVANCED_FUNCTIONS = {
     icon: Search,
     items: [
       { name: 'PROCV', snippet: 'PROCV([Valor], [Tabela], [Coluna])', description: 'Busca valor em tabela', example: 'PROCV([Codigo], "tabela_id", "nome")' },
-      { name: 'INDICE', snippet: 'INDICE([Array], [Posicao])', description: 'Valor por índice', example: 'INDICE([A], 1)' },
+      { name: 'INDICE', snippet: 'INDICE([Array], [Posicao])', description: 'Valor por Ã­ndice', example: 'INDICE([A], 1)' },
     ]
   },
   AGGREGATE: {
-    label: 'Agregação',
+    label: 'AgregaÃ§Ã£o',
     icon: Sigma,
     items: [
-      { name: 'CONT.SE', snippet: 'CONT.SE([A], ">0")', description: 'Conta se condição', example: 'CONT.SE([Status], "Ativo")' },
-      { name: 'SOMASE', snippet: 'SOMASE([A], [B], ">0")', description: 'Soma se condição', example: 'SOMASE([Valor], [Status], "Pago")' },
-      { name: 'MEDIASE', snippet: 'MEDIASE([A], [B], "Sim")', description: 'Média se condição', example: 'MEDIASE([Nota], [Aprovado], "Sim")' },
+      { name: 'CONT.SE', snippet: 'CONT.SE([A], ">0")', description: 'Conta se condiÃ§Ã£o', example: 'CONT.SE([Status], "Ativo")' },
+      { name: 'SOMASE', snippet: 'SOMASE([A], [B], ">0")', description: 'Soma se condiÃ§Ã£o', example: 'SOMASE([Valor], [Status], "Pago")' },
+      { name: 'MEDIASE', snippet: 'MEDIASE([A], [B], "Sim")', description: 'MÃ©dia se condiÃ§Ã£o', example: 'MEDIASE([Nota], [Aprovado], "Sim")' },
     ]
   }
 };
@@ -182,7 +182,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
     const openParens = (expression.match(/\(/g) || []).length;
     const closeParens = (expression.match(/\)/g) || []).length;
     if (openParens !== closeParens) {
-      setValidationError('Parênteses não balanceados');
+      setValidationError('ParÃªnteses nÃ£o balanceados');
       return;
     }
 
@@ -267,7 +267,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
         {/* Left Column: Reference Management */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm">Colunas (Variáveis)</Label>
+            <Label className="text-sm">Colunas (VariÃ¡veis)</Label>
             <Popover open={isAddingRef} onOpenChange={setIsAddingRef}>
               <PopoverTrigger asChild>
                 <Button variant="outline" size="sm" className="gap-1 h-7 text-xs">
@@ -301,7 +301,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
 
                   {selectedTable && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs">Colunas Disponíveis</Label>
+                      <Label className="text-xs">Colunas DisponÃ­veis</Label>
                       <ScrollArea className="h-48 border rounded-md p-1">
                         <div className="space-y-1">
                           {availableColumns.length === 0 ? (
@@ -365,7 +365,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-full text-xs text-muted-foreground text-center px-4">
-                <p>Você pode adicionar colunas acima</p>
+                <p>VocÃª pode adicionar colunas acima</p>
                 <p className="mt-1 opacity-75">Ou digitar direto: <span className="font-mono">[qt] * [valor]</span></p>
               </div>
             )}
@@ -375,7 +375,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
         {/* Right Column: Functions */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm">Funções</Label>
+            <Label className="text-sm">FunÃ§Ãµes</Label>
             <div className="flex items-center gap-1 bg-muted rounded-md p-0.5">
               <Button
                 variant={functionLevel === 'basic' ? 'secondary' : 'ghost'}
@@ -384,7 +384,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
                 onClick={() => setFunctionLevel('basic')}
               >
                 <Calculator className="h-3 w-3 mr-1" />
-                Básico
+                BÃ¡sico
               </Button>
               <Button
                 variant={functionLevel === 'advanced' ? 'secondary' : 'ghost'}
@@ -393,7 +393,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
                 onClick={() => setFunctionLevel('advanced')}
               >
                 <Sparkles className="h-3 w-3 mr-1" />
-                Avançado
+                AvanÃ§ado
               </Button>
             </div>
           </div>
@@ -469,7 +469,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
       {/* Expression input */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label className="text-sm">Fórmula</Label>
+          <Label className="text-sm">FÃ³rmula</Label>
           {validationError && (
             <span className="text-[10px] text-destructive flex items-center gap-1">
               <X className="h-3 w-3" />
@@ -485,7 +485,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
             onChange={(e) => setExpression(e.target.value)}
             placeholder={functionLevel === 'basic' 
               ? 'Ex: SOMA([A], [B]) * 0.1' 
-              : 'Ex: SEERRO(PROCV([Cod], "tabela", "Nome"), "Não encontrado")'}
+              : 'Ex: SEERRO(PROCV([Cod], "tabela", "Nome"), "NÃ£o encontrado")'}
             className={`flex min-h-[80px] w-full rounded-md border bg-background px-3 py-2 pl-9 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 font-mono resize-none ${
               validationError ? 'border-destructive focus-visible:ring-destructive' : 'border-input'
             }`}
@@ -507,7 +507,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
       {/* Preview */}
       {expression && references.length > 0 && (
         <div className="p-2 bg-muted/50 rounded-md">
-          <p className="text-[10px] text-muted-foreground mb-1">Visualização (com referências mapeadas):</p>
+          <p className="text-[10px] text-muted-foreground mb-1">VisualizaÃ§Ã£o (com referÃªncias mapeadas):</p>
           <p className="font-mono text-[10px] break-all text-muted-foreground">
             {references.reduce((exp, ref) => 
               exp.replace(
@@ -734,22 +734,20 @@ export function evaluateFormula(
     
     for (const ref of (config.references || [])) {
       let rawValue: any = '';
-      if (allTablesData && allTablesData[ref.tableId]) {
-         if (currentRowData[ref.columnName] !== undefined && (!ref.tableName || ref.tableId === (currentRowData as any)._tableId)) {
-           rawValue = currentRowData[ref.columnName];
-         } else {
-           const rows = allTablesData[ref.tableId];
-           rawValue = rows.map(r => r[ref.columnName]);
-         }
-      } else {
-        rawValue = currentRowData[ref.columnName];
+      // Check if this column exists in the current row (same-table reference)
+      if (ref.columnName in currentRowData || currentRowData[ref.columnName] !== undefined) {
+        rawValue = currentRowData[ref.columnName] ?? '';
+      } else if (allTablesData && allTablesData[ref.tableId]) {
+        // Cross-table reference: get all values from referenced table
+        const rows = allTablesData[ref.tableId];
+        rawValue = rows.map(r => r[ref.columnName]);
       }
       vars[ref.alias] = Array.isArray(rawValue) ? rawValue.map(v => safeParseValue(v)) : safeParseValue(rawValue);
     }
 
     let jsExpression = config.expression;
 
-    // Remove referências inválidas com ponto como CONT.SE para CONT_SE antes do eval
+    // Remove referÃªncias invÃ¡lidas com ponto como CONT.SE para CONT_SE antes do eval
     jsExpression = jsExpression.replace(/CONT\.SE/gi, 'CONT_SE');
     jsExpression = jsExpression.replace(/(\d),(\d)/g, '$1.$2');
     jsExpression = jsExpression.replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
@@ -783,7 +781,7 @@ export function evaluateFormula(
     const funcKeys = Object.keys(context);
     const funcValues = Object.values(context);
     
-    // Evitar duplicidade de nomes de funções ("E" minúsculo vira "e", mas capitalizado fica "E" de novo gerando conflito)
+    // Evitar duplicidade de nomes de funÃ§Ãµes ("E" minÃºsculo vira "e", mas capitalizado fica "E" de novo gerando conflito)
     const uniqueKeys = new Set<string>();
     const finalFuncKeys: string[] = [];
     const finalFuncValues: any[] = [];
@@ -824,6 +822,6 @@ export function evaluateFormula(
 
   } catch (error: any) {
     console.error('Formula evaluation error:', error, 'Expression:', config.expression);
-    return `Erro na fórmula! (${error.message})`;
+    return `Erro na fÃ³rmula! (${error.message})`;
   }
 };
