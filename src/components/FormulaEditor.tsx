@@ -39,11 +39,11 @@ export interface FormulaReference {
 
 const OPERATORS = [
   { value: '+', label: 'Soma (+)' },
-  { value: '-', label: 'SubtraÃƒÂ§ÃƒÂ£o (-)' },
-  { value: '*', label: 'MultiplicaÃƒÂ§ÃƒÂ£o (Ãƒâ€”)' },
-  { value: '/', label: 'DivisÃƒÂ£o (ÃƒÂ·)' },
-  { value: '(', label: 'Abre parÃƒÂªntese' },
-  { value: ')', label: 'Fecha parÃƒÂªntese' },
+  { value: '-', label: 'Subtração (-)' },
+  { value: '*', label: 'Multiplicação (×)' },
+  { value: '/', label: 'Divisão (÷)' },
+  { value: '(', label: 'Abre parêntese' },
+  { value: ')', label: 'Fecha parêntese' },
   { value: ',', label: 'Separador (,)' },
 ];
 
@@ -58,53 +58,53 @@ const LOGIC_OPERATORS = [
 
 const BASIC_FUNCTIONS = {
   MATH: {
-    label: 'MatemÃƒÂ¡tica BÃƒÂ¡sica',
+    label: 'Matemática Básica',
     icon: Calculator,
     items: [
-      { name: 'SOMA', snippet: 'SOMA([A], [B])', description: 'Soma valores', example: 'SOMA([A], [B], 10)' },
-      { name: 'MEDIA', snippet: 'MEDIA([A], [B])', description: 'MÃƒÂ©dia aritmÃƒÂ©tica', example: 'MEDIA([A], [B])' },
-      { name: 'ARRED', snippet: 'ARRED([A], 2)', description: 'Arredonda nÃƒÂºmero', example: 'ARRED([A], 2)' },
+      { name: 'SOMA', snippet: 'SOMA([A], [B])', description: 'Soma valores', example: 'SOMA([A], [B])' },
+      { name: 'MEDIA', snippet: 'MEDIA([A], [B])', description: 'Média aritmética', example: 'MEDIA([A], [B])' },
+      { name: 'ARRED', snippet: 'ARRED([A], 2)', description: 'Arredonda número', example: 'ARRED([A], 2)' },
     ]
   },
   LOGIC: {
-    label: 'LÃƒÂ³gica BÃƒÂ¡sica',
+    label: 'Lógica Básica',
     icon: ArrowLeftRight,
     items: [
-      { name: 'SE', snippet: 'SE([A] > 10, "Sim", "NÃƒÂ£o")', description: 'Condicional SE', example: 'SE([A] > 0, [A], 0)' },
+      { name: 'SE', snippet: 'SE([A] > 10, "Sim", "Não")', description: 'Condicional SE', example: 'SE([A] > 0, [A], 0)' },
     ]
   },
   TEXT: {
-    label: 'Texto BÃƒÂ¡sico',
+    label: 'Texto Básico',
     icon: Type,
     items: [
       { name: 'CONCAT', snippet: 'CONCAT([A], " ", [B])', description: 'Junta textos', example: 'CONCAT("R$ ", [A])' },
     ]
   },
   DATE: {
-    label: 'Data BÃƒÂ¡sica',
+    label: 'Data Básica',
     icon: Calendar,
     items: [
       { name: 'HOJE', snippet: 'HOJE()', description: 'Data atual', example: 'HOJE()' },
-      { name: 'DIAS', snippet: 'DIAS([Fim], [Inicio])', description: 'DiferenÃƒÂ§a em dias', example: 'DIAS([DataFim], [DataInicio])' },
+      { name: 'DIAS', snippet: 'DIAS([Fim], [Inicio])', description: 'Diferença em dias', example: 'DIAS([DataFim], [DataInicio])' },
     ]
   }
 };
 
 const ADVANCED_FUNCTIONS = {
   MATH: {
-    label: 'MatemÃƒÂ¡tica AvanÃƒÂ§ada',
+    label: 'Matemática Avançada',
     icon: Calculator,
     items: [
       { name: 'MAX', snippet: 'MAX([A], [B])', description: 'Maior valor', example: 'MAX([A], [B], [C])' },
       { name: 'MIN', snippet: 'MIN([A], [B])', description: 'Menor valor', example: 'MIN([A], [B])' },
       { name: 'ABS', snippet: 'ABS([A])', description: 'Valor absoluto', example: 'ABS([A])' },
-      { name: 'POTENCIA', snippet: 'POTENCIA([A], 2)', description: 'PotÃƒÂªncia (n^m)', example: 'POTENCIA([A], 2)' },
+      { name: 'POTENCIA', snippet: 'POTENCIA([A], 2)', description: 'Potência (n^m)', example: 'POTENCIA([A], 2)' },
       { name: 'RAIZ', snippet: 'RAIZ([A])', description: 'Raiz quadrada', example: 'RAIZ([A])' },
-      { name: 'MOD', snippet: 'MOD([A], 2)', description: 'Resto da divisÃƒÂ£o', example: 'MOD([A], 2)' },
+      { name: 'MOD', snippet: 'MOD([A], 2)', description: 'Resto da divisão', example: 'MOD([A], 2)' },
     ]
   },
   LOGIC: {
-    label: 'LÃƒÂ³gica AvanÃƒÂ§ada',
+    label: 'Lógica Avançada',
     icon: ArrowLeftRight,
     items: [
       { name: 'E', snippet: 'E([A] > 0, [B] < 10)', description: 'E lÃƒÂ³gico (AND)', example: 'E([A] > 0, [B] > 0)' },
@@ -113,11 +113,11 @@ const ADVANCED_FUNCTIONS = {
     ]
   },
   TEXT: {
-    label: 'Texto AvanÃƒÂ§ado',
+    label: 'Texto Avançado',
     icon: Type,
     items: [
-      { name: 'MAIUSCULA', snippet: 'MAIUSCULA([A])', description: 'Texto em maiÃƒÂºsculas', example: 'MAIUSCULA([Nome])' },
-      { name: 'MINUSCULA', snippet: 'MINUSCULA([A])', description: 'Texto em minÃƒÂºsculas', example: 'MINUSCULA([Nome])' },
+      { name: 'MAIUSCULA', snippet: 'MAIUSCULA([A])', description: 'Texto em maiúsculas', example: 'MAIUSCULA([Nome])' },
+      { name: 'MINUSCULA', snippet: 'MINUSCULA([A])', description: 'Texto em minúsculas', example: 'MINUSCULA([Nome])' },
       { name: 'ESQUERDA', snippet: 'ESQUERDA([A], 3)', description: 'N caracteres da esquerda', example: 'ESQUERDA([Codigo], 3)' },
       { name: 'DIREITA', snippet: 'DIREITA([A], 2)', description: 'N caracteres da direita', example: 'DIREITA([Codigo], 2)' },
       { name: 'TAMANHO', snippet: 'TAMANHO([A])', description: 'Quantidade de caracteres', example: 'TAMANHO([Nome])' },
@@ -125,13 +125,13 @@ const ADVANCED_FUNCTIONS = {
     ]
   },
   DATE: {
-    label: 'Data AvanÃƒÂ§ada',
+    label: 'Data Avançada',
     icon: Calendar,
     items: [
       { name: 'ANO', snippet: 'ANO([A])', description: 'Extrai o ano', example: 'ANO([Data])' },
-      { name: 'MES', snippet: 'MES([A])', description: 'Extrai o mÃƒÂªs (1-12)', example: 'MES([Data])' },
+      { name: 'MES', snippet: 'MES([A])', description: 'Extrai o mês (1-12)', example: 'MES([Data])' },
       { name: 'DIA', snippet: 'DIA([A])', description: 'Extrai o dia', example: 'DIA([Data])' },
-      { name: 'DIASUTEIS', snippet: 'DIASUTEIS([Inicio], [Fim])', description: 'Dias ÃƒÂºteis entre datas', example: 'DIASUTEIS([Inicio], [Fim])' },
+      { name: 'DIASUTEIS', snippet: 'DIASUTEIS([Inicio], [Fim])', description: 'Dias úteis entre datas', example: 'DIASUTEIS([Inicio], [Fim])' },
     ]
   },
   LOOKUP: {
@@ -139,16 +139,16 @@ const ADVANCED_FUNCTIONS = {
     icon: Search,
     items: [
       { name: 'PROCV', snippet: 'PROCV([Valor], [Tabela], [Coluna])', description: 'Busca valor em tabela', example: 'PROCV([Codigo], "tabela_id", "nome")' },
-      { name: 'INDICE', snippet: 'INDICE([Array], [Posicao])', description: 'Valor por ÃƒÂ­ndice', example: 'INDICE([A], 1)' },
+      { name: 'INDICE', snippet: 'INDICE([Array], [Posicao])', description: 'Valor por índice', example: 'INDICE([A], 1)' },
     ]
   },
   AGGREGATE: {
-    label: 'AgregaÃƒÂ§ÃƒÂ£o',
+    label: 'Agregação',
     icon: Sigma,
     items: [
-      { name: 'CONT.SE', snippet: 'CONT.SE([A], ">0")', description: 'Conta se condiÃƒÂ§ÃƒÂ£o', example: 'CONT.SE([Status], "Ativo")' },
-      { name: 'SOMASE', snippet: 'SOMASE([A], [B], ">0")', description: 'Soma se condiÃƒÂ§ÃƒÂ£o', example: 'SOMASE([Valor], [Status], "Pago")' },
-      { name: 'MEDIASE', snippet: 'MEDIASE([A], [B], "Sim")', description: 'MÃƒÂ©dia se condiÃƒÂ§ÃƒÂ£o', example: 'MEDIASE([Nota], [Aprovado], "Sim")' },
+      { name: 'CONT.SE', snippet: 'CONT.SE([A], ">0")', description: 'Conta se condição', example: 'CONT.SE([Status], "Ativo")' },
+      { name: 'SOMASE', snippet: 'SOMASE([A], [B], ">0")', description: 'Soma se condição', example: 'SOMASE([Valor], [Status], "Pago")' },
+      { name: 'MEDIASE', snippet: 'MEDIASE([A], [B], "Sim")', description: 'Média se condição', example: 'MEDIASE([Nota], [Aprovado], "Sim")' },
     ]
   }
 };
@@ -201,7 +201,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
   const handleAddReference = (tableId: string, columnName: string) => {
     const table = tables.find(t => t.id === tableId);
     const column = table?.columns.find(c => c.name === columnName);
-    
+
     if (!table || !column) return;
 
     const existing = references.find(r => r.tableId === tableId && r.columnName === columnName);
@@ -236,7 +236,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
       const end = input.selectionEnd || expression.length;
       const newExpression = expression.substring(0, start) + text + expression.substring(end);
       setExpression(newExpression);
-      
+
       setTimeout(() => {
         input.focus();
         const newPos = start + text.length;
@@ -267,7 +267,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
         {/* Left Column: Reference Management */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm">Colunas (VariÃƒÂ¡veis)</Label>
+            <Label className="text-sm">Colunas (Variáveis)</Label>
             <Popover open={isAddingRef} onOpenChange={setIsAddingRef}>
               <PopoverTrigger asChild>
                 <Button variant="outline" size="sm" className="gap-1 h-7 text-xs">
@@ -301,7 +301,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
 
                   {selectedTable && (
                     <div className="space-y-1.5">
-                      <Label className="text-xs">Colunas DisponÃƒÂ­veis</Label>
+                      <Label className="text-xs">Colunas Disponíveis</Label>
                       <ScrollArea className="h-48 border rounded-md p-1">
                         <div className="space-y-1">
                           {availableColumns.length === 0 ? (
@@ -338,9 +338,9 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
             {references.length > 0 ? (
               <div className="flex flex-wrap gap-1.5">
                 {references.map(ref => (
-                  <Badge 
-                    key={ref.alias} 
-                    variant="secondary" 
+                  <Badge
+                    key={ref.alias}
+                    variant="secondary"
                     className="gap-1 pr-1 cursor-pointer hover:bg-secondary/80 bg-background shadow-sm border"
                     onClick={() => insertInExpression(`[${ref.alias}]`)}
                     title={`Clique para inserir: ${ref.tableName}.${ref.columnDisplayName}`}
@@ -365,7 +365,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-full text-xs text-muted-foreground text-center px-4">
-                <p>VocÃƒÂª pode adicionar colunas acima</p>
+                <p>Você pode adicionar colunas acima</p>
                 <p className="mt-1 opacity-75">Ou digitar direto: <span className="font-mono">[qt] * [valor]</span></p>
               </div>
             )}
@@ -375,7 +375,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
         {/* Right Column: Functions */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm">FunÃƒÂ§ÃƒÂµes</Label>
+            <Label className="text-sm">Funções</Label>
             <div className="flex items-center gap-1 bg-muted rounded-md p-0.5">
               <Button
                 variant={functionLevel === 'basic' ? 'secondary' : 'ghost'}
@@ -384,7 +384,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
                 onClick={() => setFunctionLevel('basic')}
               >
                 <Calculator className="h-3 w-3 mr-1" />
-                BÃƒÂ¡sico
+                Básico
               </Button>
               <Button
                 variant={functionLevel === 'advanced' ? 'secondary' : 'ghost'}
@@ -393,11 +393,11 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
                 onClick={() => setFunctionLevel('advanced')}
               >
                 <Sparkles className="h-3 w-3 mr-1" />
-                AvanÃƒÂ§ado
+                Avançado
               </Button>
             </div>
           </div>
-          
+
           <Tabs defaultValue={Object.keys(currentFunctions)[0]} className="w-full">
             <TabsList className="w-full grid h-8" style={{ gridTemplateColumns: `repeat(${Object.keys(currentFunctions).length}, 1fr)` }}>
               {Object.entries(currentFunctions).map(([key, category]) => {
@@ -409,7 +409,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
                 );
               })}
             </TabsList>
-            
+
             {Object.entries(currentFunctions).map(([key, category]) => (
               <TabsContent key={key} value={key} className="mt-2">
                 <ScrollArea className="h-[120px] border rounded-md p-1">
@@ -469,7 +469,7 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
       {/* Expression input */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label className="text-sm">FÃƒÂ³rmula</Label>
+          <Label className="text-sm">Fórmula</Label>
           {validationError && (
             <span className="text-[10px] text-destructive flex items-center gap-1">
               <X className="h-3 w-3" />
@@ -483,12 +483,11 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
             id="formula-input"
             value={expression}
             onChange={(e) => setExpression(e.target.value)}
-            placeholder={functionLevel === 'basic' 
-              ? 'Ex: SOMA([A], [B]) * 0.1' 
-              : 'Ex: SEERRO(PROCV([Cod], "tabela", "Nome"), "NÃƒÂ£o encontrado")'}
-            className={`flex min-h-[80px] w-full rounded-md border bg-background px-3 py-2 pl-9 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 font-mono resize-none ${
-              validationError ? 'border-destructive focus-visible:ring-destructive' : 'border-input'
-            }`}
+            placeholder={functionLevel === 'basic'
+              ? 'Ex: SOMA([A], [B]) * 0.1'
+              : 'Ex: SEERRO(PROCV([Cod], "tabela", "Nome"), "Não encontrado")'}
+            className={`flex min-h-[80px] w-full rounded-md border bg-background px-3 py-2 pl-9 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 font-mono resize-none ${validationError ? 'border-destructive focus-visible:ring-destructive' : 'border-input'
+              }`}
           />
           <div className="absolute right-2 top-2">
             <Button
@@ -507,13 +506,13 @@ export function FormulaEditor({ tables, currentTableId, value, onChange }: Formu
       {/* Preview */}
       {expression && references.length > 0 && (
         <div className="p-2 bg-muted/50 rounded-md">
-          <p className="text-[10px] text-muted-foreground mb-1">VisualizaÃƒÂ§ÃƒÂ£o (com referÃƒÂªncias mapeadas):</p>
+          <p className="text-[10px] text-muted-foreground mb-1">Visualização (com referências mapeadas):</p>
           <p className="font-mono text-[10px] break-all text-muted-foreground">
-            {references.reduce((exp, ref) => 
+            {references.reduce((exp, ref) =>
               exp.replace(
-                new RegExp(`\\[${ref.alias}\\]`, 'gi'), 
+                new RegExp(`\\[${ref.alias}\\]`, 'gi'),
                 `{${ref.columnDisplayName}}`
-              ), 
+              ),
               expression
             )}
           </p>
@@ -528,20 +527,20 @@ export function safeParseValue(value: any): number | string | Date {
   if (value === null || value === undefined) return 0;
   if (typeof value === 'number') return value;
   if (value instanceof Date) return value;
-  
+
   const strValue = String(value).trim();
   if (strValue === '') return 0;
-  
+
   if (strValue.includes(',') && /\d+,\d+/.test(strValue)) {
     const cleanValue = strValue.replace(/[R$\s]/g, '').replace(/\./g, '').replace(',', '.');
     const num = parseFloat(cleanValue);
     if (!isNaN(num)) return num;
   } else {
-    const cleanValue = strValue.replace(/[R$\s]/g, '').replace(/,/g, ''); 
+    const cleanValue = strValue.replace(/[R$\s]/g, '').replace(/,/g, '');
     const num = parseFloat(cleanValue);
     if (!isNaN(num)) return num;
   }
-  
+
   return strValue;
 }
 
@@ -731,7 +730,7 @@ export function evaluateFormula(
     };
 
     const vars: Record<string, any> = {};
-    
+
     for (const ref of (config.references || [])) {
       let rawValue: any = '';
       // Check if this column exists in the current row (same-table reference)
@@ -747,7 +746,7 @@ export function evaluateFormula(
 
     let jsExpression = config.expression;
 
-    // Remove referÃƒÂªncias invÃƒÂ¡lidas com ponto como CONT.SE para CONT_SE antes do eval
+    // Remove referências inválidas com ponto como CONT.SE para CONT_SE antes do eval
     jsExpression = jsExpression.replace(/CONT\.SE/gi, 'CONT_SE');
     jsExpression = jsExpression.replace(/(\d),(\d)/g, '$1.$2');
     jsExpression = jsExpression.replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
@@ -756,32 +755,32 @@ export function evaluateFormula(
 
     const sortedAliases = (config.references || []).map(r => r.alias).sort((a, b) => b.length - a.length);
     for (const alias of sortedAliases) {
-       jsExpression = jsExpression.replace(new RegExp(`\\[${alias}\\]`, 'gi'), `vars['${alias}']`);
+      jsExpression = jsExpression.replace(new RegExp(`\\[${alias}\\]`, 'gi'), `vars['${alias}']`);
     }
-    
+
     jsExpression = jsExpression.replace(/\[(.*?)]|\{(.*?)\}/g, (match, innerSquare, innerCurly) => {
-        const rawText = (innerSquare || innerCurly || '').trim();
-        const cleanText = rawText.toLowerCase();
-        const normalizedText = rawText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+      const rawText = (innerSquare || innerCurly || '').trim();
+      const cleanText = rawText.toLowerCase();
+      const normalizedText = rawText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 
-        const rowKey = Object.keys(currentRowData).find(k =>
-            k.toLowerCase() === cleanText ||
-            k.toLowerCase() === normalizedText ||
-            k === rawText
-        );
+      const rowKey = Object.keys(currentRowData).find(k =>
+        k.toLowerCase() === cleanText ||
+        k.toLowerCase() === normalizedText ||
+        k === rawText
+      );
 
-        if (rowKey) {
-            const dynamicAlias = 'DYN_' + rowKey;
-            vars[dynamicAlias] = safeParseValue(currentRowData[rowKey]);
-            return `vars['${dynamicAlias}']`;
-        }
-        return '0'; 
+      if (rowKey) {
+        const dynamicAlias = 'DYN_' + rowKey;
+        vars[dynamicAlias] = safeParseValue(currentRowData[rowKey]);
+        return `vars['${dynamicAlias}']`;
+      }
+      return '0';
     });
 
     const funcKeys = Object.keys(context);
     const funcValues = Object.values(context);
-    
-    // Evitar duplicidade de nomes de funÃƒÂ§ÃƒÂµes ("E" minÃƒÂºsculo vira "e", mas capitalizado fica "E" de novo gerando conflito)
+
+    // Evitar duplicidade de nomes de funções ("E" minúsculo vira "e", mas capitalizado fica "E" de novo gerando conflito)
     const uniqueKeys = new Set<string>();
     const finalFuncKeys: string[] = [];
     const finalFuncValues: any[] = [];
@@ -799,15 +798,15 @@ export function evaluateFormula(
       addFunc(key.toLowerCase(), funcValues[index]);
       addFunc(key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(), funcValues[index]);
     });
-    
+
     const evaluator = new Function(
       'vars',
       ...finalFuncKeys,
       `"use strict"; return (${jsExpression});`
     );
-    
+
     const result = evaluator(vars, ...finalFuncValues);
-    
+
     if (typeof result === 'number') {
       return isFinite(result) ? result : 0;
     }
@@ -817,11 +816,11 @@ export function evaluateFormula(
     if (typeof result === 'function' || (typeof result === 'object' && result !== null)) {
       return null;
     }
-    
+
     return result;
 
   } catch (error: any) {
     console.error('Formula evaluation error:', error, 'Expression:', config.expression);
-    return `Erro na fÃƒÂ³rmula! (${error.message})`;
+    return `Erro na fórmula! (${error.message})`;
   }
 };
