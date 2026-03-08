@@ -79,10 +79,11 @@ const formatCellValue = (
   value: string | undefined, 
   columnType: ColumnType, 
   column?: CustomColumn,
-  rowData?: Record<string, string>
+  rowData?: Record<string, string>,
+  tablesData?: Record<string, Record<string, string>[]>
 ): string => {
   if (columnType === 'formula' && column?.formula_config && rowData) {
-    const result = evaluateFormula(column.formula_config, rowData, allTablesData);
+    const result = evaluateFormula(column.formula_config, rowData, tablesData);
     if (result !== null) {
       if (typeof result === 'number') {
         return formatCurrency(result);
@@ -265,8 +266,8 @@ export default function ConsultaGeral() {
     }
   };
 
-  const exportToPDF = () => { if (!selectedTable || !filteredData.length) return; const doc = new jsPDF('l', 'mm', 'a4'); doc.setFontSize(16); doc.text(`Consulta: ${selectedTable.name}`, 14, 15); doc.setFontSize(10); doc.text(`Gerado em: ${format(new Date(), 'dd/MM/yyyy HH:mm')}`, 14, 22); doc.text(`Total de registros: ${filteredData.length}`, 14, 28); const headers = displayedColumns.map((c) => c.display_name); const body = filteredData.map((row) => displayedColumns.map((c) => formatCellValue(row.data[c.name], c.column_type, c, row.data))); autoTable(doc, { head: [headers], body: body, startY: 35, theme: 'striped', headStyles: { fillColor: [66, 66, 66] }, styles: { fontSize: 8 }, }); doc.save(`${selectedTable.name}-${format(new Date(), 'yyyy-MM-dd')}.pdf`); };
-  const exportToExcel = () => { if (!selectedTable || !filteredData.length) return; const headers = displayedColumns.map((c) => c.display_name); const rows = filteredData.map((row) => displayedColumns.reduce((acc, c) => { acc[c.display_name] = formatCellValue(row.data[c.name], c.column_type, c, row.data); return acc; }, {} as Record<string, string>)); const ws = XLSX.utils.json_to_sheet(rows, { header: headers }); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, selectedTable.name); XLSX.writeFile(wb, `${selectedTable.name}-${format(new Date(), 'yyyy-MM-dd')}.xlsx`); };
+  const exportToPDF = () => { if (!selectedTable || !filteredData.length) return; const doc = new jsPDF('l', 'mm', 'a4'); doc.setFontSize(16); doc.text(`Consulta: ${selectedTable.name}`, 14, 15); doc.setFontSize(10); doc.text(`Gerado em: ${format(new Date(), 'dd/MM/yyyy HH:mm')}`, 14, 22); doc.text(`Total de registros: ${filteredData.length}`, 14, 28); const headers = displayedColumns.map((c) => c.display_name); const body = filteredData.map((row) => displayedColumns.map((c) => formatCellValue(row.data[c.name], c.column_type, c, row.data, allTablesData))); autoTable(doc, { head: [headers], body: body, startY: 35, theme: 'striped', headStyles: { fillColor: [66, 66, 66] }, styles: { fontSize: 8 }, }); doc.save(`${selectedTable.name}-${format(new Date(), 'yyyy-MM-dd')}.pdf`); };
+  const exportToExcel = () => { if (!selectedTable || !filteredData.length) return; const headers = displayedColumns.map((c) => c.display_name); const rows = filteredData.map((row) => displayedColumns.reduce((acc, c) => { acc[c.display_name] = formatCellValue(row.data[c.name], c.column_type, c, row.data, allTablesData); return acc; }, {} as Record<string, string>)); const ws = XLSX.utils.json_to_sheet(rows, { header: headers }); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, selectedTable.name); XLSX.writeFile(wb, `${selectedTable.name}-${format(new Date(), 'yyyy-MM-dd')}.xlsx`); };
 
   return (
     <ModuleSidebarLayout
@@ -305,7 +306,7 @@ export default function ConsultaGeral() {
                   <p className="text-muted-foreground text-center">
                     {tableSearchFilter 
                       ? 'Nenhuma tabela encontrada com o filtro atual.' 
-                      : 'Nenhuma tabela com dados disponÃ­vel. Adicione registros em uma tabela para consultÃ¡-la aqui.'}
+                      : 'Nenhuma tabela com dados disponÃƒÂ­vel. Adicione registros em uma tabela para consultÃƒÂ¡-la aqui.'}
                   </p>
                 </CardContent>
               </Card>
@@ -350,7 +351,7 @@ export default function ConsultaGeral() {
                               <div className="flex items-center gap-1">
                                 <Badge variant="secondary" className="text-[10px] py-0 h-4 gap-1">
                                   {table.permission === 'edit' ? <PencilLine className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
-                                  {table.permission === 'edit' ? 'EdiÃ§Ã£o' : 'VisualizaÃ§Ã£o'}
+                                  {table.permission === 'edit' ? 'EdiÃƒÂ§ÃƒÂ£o' : 'VisualizaÃƒÂ§ÃƒÂ£o'}
                                 </Badge>
                               </div>
                             </div>
@@ -411,9 +412,9 @@ export default function ConsultaGeral() {
                     <Select value={filter.operator} onValueChange={(v) => updateFilter(index, 'operator', v as ColumnFilter['operator'])}>
                       <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="contains">ContÃ©m</SelectItem>
+                        <SelectItem value="contains">ContÃƒÂ©m</SelectItem>
                         <SelectItem value="equals">Igual a</SelectItem>
-                        <SelectItem value="starts">ComeÃ§a com</SelectItem>
+                        <SelectItem value="starts">ComeÃƒÂ§a com</SelectItem>
                         <SelectItem value="ends">Termina com</SelectItem>
                         <SelectItem value="greater">Maior que</SelectItem>
                         <SelectItem value="less">Menor que</SelectItem>
@@ -451,7 +452,7 @@ export default function ConsultaGeral() {
                   </DropdownMenu>
                   <Button variant="outline" size="sm" onClick={exportToPDF} disabled={!filteredData.length}><FileText className="h-4 w-4 mr-2" />PDF</Button>
                   <Button variant="outline" size="sm" onClick={exportToExcel} disabled={!filteredData.length}><FileSpreadsheet className="h-4 w-4 mr-2" />Excel</Button>
-                  {selectedTable.is_owner && (<Button variant="outline" size="sm" onClick={() => setPublicViewDialogOpen(true)}><Globe className="h-4 w-4 mr-2" />VisualizaÃ§Ã£o Externa</Button>)}
+                  {selectedTable.is_owner && (<Button variant="outline" size="sm" onClick={() => setPublicViewDialogOpen(true)}><Globe className="h-4 w-4 mr-2" />VisualizaÃƒÂ§ÃƒÂ£o Externa</Button>)}
                 </div>
               </CardHeader>
               <CardContent>
@@ -466,7 +467,7 @@ export default function ConsultaGeral() {
                         <TableRow>
                           <TableHead className="w-10"><Checkbox checked={selectedRows.size === filteredData.length && filteredData.length > 0} onCheckedChange={toggleAllSelection} /></TableHead>
                           {displayedColumns.map((col) => (<TableHead key={col.name} className="whitespace-nowrap">{col.display_name}</TableHead>))}
-                          <TableHead className="w-24 text-right">AÃ§Ãµes</TableHead>
+                          <TableHead className="w-24 text-right">AÃƒÂ§ÃƒÂµes</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -475,7 +476,7 @@ export default function ConsultaGeral() {
                             <TableCell><Checkbox checked={selectedRows.has(row.id)} onCheckedChange={() => toggleRowSelection(row.id)} /></TableCell>
                             {displayedColumns.map((col) => (
                               <TableCell key={col.name} className="whitespace-nowrap">
-                                {editingRowId === row.id && col.column_type !== 'formula' ? (<Input value={editingData[col.name] || ''} onChange={(e) => setEditingData({ ...editingData, [col.name]: e.target.value })} className="h-8 min-w-[100px]" />) : (formatCellValue(row.data[col.name], col.column_type, col, row.data))}
+                                {editingRowId === row.id && col.column_type !== 'formula' ? (<Input value={editingData[col.name] || ''} onChange={(e) => setEditingData({ ...editingData, [col.name]: e.target.value })} className="h-8 min-w-[100px]" />) : (formatCellValue(row.data[col.name], col.column_type, col, row.data, allTablesData))}
                               </TableCell>
                             ))}
                             <TableCell className="text-right">
@@ -518,7 +519,7 @@ export default function ConsultaGeral() {
 
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
-          <AlertDialogHeader><AlertDialogTitle>Confirmar ExclusÃ£o</AlertDialogTitle><AlertDialogDescription>Tem certeza que deseja excluir este registro? Esta aÃ§Ã£o nÃ£o pode ser desfeita.</AlertDialogDescription></AlertDialogHeader>
+          <AlertDialogHeader><AlertDialogTitle>Confirmar ExclusÃƒÂ£o</AlertDialogTitle><AlertDialogDescription>Tem certeza que deseja excluir este registro? Esta aÃƒÂ§ÃƒÂ£o nÃƒÂ£o pode ser desfeita.</AlertDialogDescription></AlertDialogHeader>
           <AlertDialogFooter><AlertDialogCancel>Cancelar</AlertDialogCancel><AlertDialogAction onClick={handleDeleteRow} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">Excluir</AlertDialogAction></AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
@@ -526,8 +527,8 @@ export default function ConsultaGeral() {
       <AlertDialog open={bulkDeleteDialogOpen} onOpenChange={setBulkDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirmar ExclusÃ£o em Massa</AlertDialogTitle>
-            <AlertDialogDescription>Tem certeza que deseja excluir {selectedRows.size} registro{selectedRows.size !== 1 ? 's' : ''}? Esta aÃ§Ã£o nÃ£o pode ser desfeita.</AlertDialogDescription>
+            <AlertDialogTitle>Confirmar ExclusÃƒÂ£o em Massa</AlertDialogTitle>
+            <AlertDialogDescription>Tem certeza que deseja excluir {selectedRows.size} registro{selectedRows.size !== 1 ? 's' : ''}? Esta aÃƒÂ§ÃƒÂ£o nÃƒÂ£o pode ser desfeita.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={isDeletingBulk}>Cancelar</AlertDialogCancel>
